@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -56,4 +57,13 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation("com.google.firebase:firebase-auth-ktx:22.0.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.0.0")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")  // Necesario para AppCompatActivity
+    implementation("androidx.core:core-ktx:1.9.0")        // Funcionalidades modernas de Android
+    implementation("com.google.android.material:material:1.8.0") // Material Design
+
 }

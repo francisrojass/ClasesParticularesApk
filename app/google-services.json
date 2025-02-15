@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "689661375543",
+    "project_id": "clasesparticularesapp-6d90c",
+    "storage_bucket": "clasesparticularesapp-6d90c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689661375543:android:110bed8affb2f066ca7bb2",
+        "android_client_info": {
+          "package_name": "com.example.clasesparticularesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCamXdaE8vYPbuPLgctKbNW0IHbKIzeSIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
