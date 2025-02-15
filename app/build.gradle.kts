@@ -58,12 +58,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("com.google.firebase:firebase-auth-ktx:22.0.0")
-    implementation("com.google.firebase:firebase-firestore-ktx:24.0.0")
-    implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")  // Necesario para AppCompatActivity
-    implementation("androidx.core:core-ktx:1.9.0")        // Funcionalidades modernas de Android
-    implementation("com.google.android.material:material:1.8.0") // Material Design
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.play.services.auth)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx.v190)        
+    implementation(libs.material) // Material Design
 
 }
