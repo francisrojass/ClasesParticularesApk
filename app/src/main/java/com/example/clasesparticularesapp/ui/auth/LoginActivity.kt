@@ -8,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.clasesparticularesapp.R
 import com.example.clasesparticularesapp.auth.AuthManager
 import com.example.clasesparticularesapp.MainActivity
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var authManager: AuthManager
-    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var firebaseAuth: FirebaseAuth
 
     private val googleSignInLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -22,8 +22,7 @@ class LoginActivity : AppCompatActivity() {
             val data: Intent? = result.data
             authManager.signInWithGoogle(data!!) { success, message ->
                 if (success) {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    goToMainActivity() // 🔹 Ir a MainActivity si el login es exitoso
                 } else {
                     Toast.makeText(this, "Error: $message", Toast.LENGTH_SHORT).show()
                 }
@@ -36,7 +35,12 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         authManager = AuthManager(this)
-        googleSignInClient = authManager.getGoogleSignInClient()
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        // 🔹 Verifica si el usuario ya ha iniciado sesión
+        if (firebaseAuth.currentUser != null) {
+            goToMainActivity()
+        }
 
         val emailInput = findViewById<EditText>(R.id.email_input)
         val passwordInput = findViewById<EditText>(R.id.password_input)
@@ -47,10 +51,15 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailInput.text.toString()
             val password = passwordInput.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             authManager.loginUser(email, password) { success, message ->
                 if (success) {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    goToMainActivity()
                 } else {
                     Toast.makeText(this, "Error: $message", Toast.LENGTH_SHORT).show()
                 }
@@ -58,21 +67,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         googleButton.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
+            val signInIntent = authManager.getGoogleSignInClient().signInIntent
             googleSignInLauncher.launch(signInIntent)
         }
 
         registerButton.setOnClickListener {
-            val email = emailInput.text.toString()
-            val password = passwordInput.text.toString()
-            authManager.registerUser(email, password) { success, message ->
-                if (success) {
-                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this, "Error: $message", Toast.LENGTH_SHORT).show()
-                }
-            }
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
+
+    private fun goToMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish() // 🔹 Cierra `LoginActivity` para que el usuario no pueda volver atrás
+    }
 }
+
+
 

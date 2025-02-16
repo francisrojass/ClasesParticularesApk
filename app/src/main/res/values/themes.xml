@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.ClasesParticularesApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- ✅ Tema general de la aplicación -->
+    <style name="Theme.ClasesParticularesApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- ✅ Tema específico para la pantalla de Splash -->
+    <style name="Theme.SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
 </resources>

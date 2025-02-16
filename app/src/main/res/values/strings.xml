@@ -1,8 +1,41 @@
 <resources>
+    <!-- Nombre de la Aplicación -->
     <string name="app_name">ClasesParticularesApp</string>
-    <string name="email_hint">Email</string>
+
+    <!-- Campos de Entrada -->
+    <string name="email_hint">Correo Electrónico</string>
     <string name="password_hint">Contraseña</string>
+    <string name="confirm_password_hint">Confirmar Contraseña</string> <!-- 🆕 Agregado para Registro -->
+
+    <!-- Botones -->
     <string name="login_button">Iniciar Sesión</string>
     <string name="google_sign_in_button">Iniciar con Google</string>
     <string name="register_button">Registrarse</string>
+    <string name="back_to_login">Volver al Inicio</string> <!-- 🆕 Agregado -->
+
+    <!-- Mensajes de Error / Confirmación -->
+    <string name="error_empty_fields">Por favor, completa todos los campos</string>
+    <string name="error_invalid_email">Introduce un correo electrónico válido</string>
+    <string name="error_password_mismatch">Las contraseñas no coinciden</string> <!-- 🆕 Agregado -->
+    <string name="error_login_failed">Error al iniciar sesión: %1$s</string>
+    <string name="error_register_failed">Error al registrarse: %1$s</string>
+    <string name="success_registration">Registro exitoso</string>
+
+    <!-- Otros Textos -->
+    <string name="register_prompt">¿No tienes cuenta? Regístrate aquí</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+
+    <string name="role_selection">Selecciona tu Rol</string>
+    <string name="logo_description">Logo de la aplicación</string>
+    <string name="student_label">Alumno</string>
+    <string name="teacher_label">Profesor</string>
+
+    <string name="select_role">Selecciona tu Rol</string>
+    <string name="student_role">Alumno</string>
+    <string name="teacher_role">Profesor</string>
+
+    <!-- Descripciones de imágenes para accesibilidad -->
+    <string name="student_image_desc">Icono de Alumno</string>
+    <string name="teacher_image_desc">Icono de Profesor</string>
 </resources>
+

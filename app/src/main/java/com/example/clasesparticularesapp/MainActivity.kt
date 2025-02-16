@@ -1,47 +1,34 @@
 package com.example.clasesparticularesapp
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.clasesparticularesapp.ui.theme.ClasesParticularesAppTheme
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import com.example.clasesparticularesapp.ui.student.StudentActivity
+import com.example.clasesparticularesapp.ui.teacher.TeacherActivity
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ClasesParticularesAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+        setContentView(R.layout.activity_main)
+
+        val studentCard = findViewById<CardView>(R.id.student_card)
+        val teacherCard = findViewById<CardView>(R.id.teacher_card)
+        val titleText = findViewById<TextView>(R.id.title_text)
+
+        studentCard.setOnClickListener {
+            startActivity(Intent(this, StudentActivity::class.java))
+        }
+
+        teacherCard.setOnClickListener {
+            startActivity(Intent(this, TeacherActivity::class.java))
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ClasesParticularesAppTheme {
-        Greeting("Android")
-    }
-}
+
+
+
+
