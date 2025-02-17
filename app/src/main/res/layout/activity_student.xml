@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,7 +11,7 @@
         android:id="@+id/student_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bienvenido Alumno"
+        android:text="@string/student_welcome"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,7 +23,7 @@
         android:id="@+id/find_teachers_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buscar Profesores"
+        android:text="@string/find_teachers"
         app:layout_constraintTop_toBottomOf="@id/student_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,10 +33,11 @@
         android:id="@+id/my_classes_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mis Clases"
+        android:text="@string/my_classes"
         app:layout_constraintTop_toBottomOf="@id/find_teachers_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

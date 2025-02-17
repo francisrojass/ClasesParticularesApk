@@ -37,5 +37,15 @@
     <!-- Descripciones de imágenes para accesibilidad -->
     <string name="student_image_desc">Icono de Alumno</string>
     <string name="teacher_image_desc">Icono de Profesor</string>
+
+    <string name="student_welcome">Bienvenido Alumno</string>
+    <string name="find_teachers">Buscar Profesores</string>
+    <string name="my_classes">Mis Clases</string>
+
+    <string name="teacher_welcome">Bienvenido, Profesor</string>
+    <string name="view_students">Ver Alumnos</string>
+    <string name="manage_classes">Mis Clases</string>
+
+    <string name="default_web_client_id">TU_CLIENT_ID_AQUI</string>
 </resources>
 
