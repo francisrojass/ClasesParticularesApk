@@ -1,10 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- ✅ Tema general de la aplicación -->
     <style name="Theme.ClasesParticularesApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
+
+        <!-- 🔵 Cambia el color principal de la app -->
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimaryVariant">@color/dark2_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- 🔘 Personaliza los botones -->
+        <item name="colorButtonNormal">@color/dark_blue</item>
     </style>
 
     <!-- ✅ Tema específico para la pantalla de Splash -->
@@ -13,3 +20,4 @@
     </style>
 
 </resources>
+

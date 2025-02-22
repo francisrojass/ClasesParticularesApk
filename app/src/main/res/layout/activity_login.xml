@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="16dp"
     android:gravity="center">
+
+    <!-- Icono de la aplicación -->
+
+    <!-- Título -->
+    <ImageView
+        android:id="@+id/app_icon"
+        android:layout_width="143dp"
+        android:layout_height="159dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/app_icon_desc"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clases_particulares"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginBottom="24dp"/>
 
     <EditText
         android:id="@+id/email_input"
@@ -14,7 +37,9 @@
         android:minHeight="48dp"
         android:autofillHints="emailAddress"
         android:inputType="textEmailAddress"
-        android:layout_margin="16dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:padding="10dp"/>
 
     <EditText
         android:id="@+id/password_input"
@@ -24,24 +49,43 @@
         android:minHeight="48dp"
         android:inputType="textPassword"
         android:autofillHints="password"
-        android:layout_margin="16dp"/>
-
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="19dp"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/login_button" />
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:text="@string/login_button"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="19dp" />
 
     <Button
         android:id="@+id/google_sign_in_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/google_sign_in_button" />
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:text="@string/google_sign_in_button"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="19dp" />
 
     <Button
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register_button" />
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:text="@string/register_button"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="8dp" />
+
 </LinearLayout>
+
+

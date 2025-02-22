@@ -47,5 +47,9 @@
     <string name="manage_classes">Mis Clases</string>
 
     <string name="default_web_client_id">TU_CLIENT_ID_AQUI</string>
+    <string name="app_icon_desc">Clases Particulares</string>
+    <string name="clases_particulares">Clases Particulares</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="back">Retroceder</string>
 </resources>
 

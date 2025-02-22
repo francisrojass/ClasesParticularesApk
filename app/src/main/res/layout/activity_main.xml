@@ -20,6 +20,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="50dp"/>
 
+    <!-- CardView para Estudiante -->
     <androidx.cardview.widget.CardView
         android:id="@+id/student_card"
         android:layout_width="300dp"
@@ -27,17 +28,19 @@
         android:layout_marginTop="30dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@id/title_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="onStudentClick">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="16dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="100dp"
@@ -55,6 +58,7 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- CardView para Profesor -->
     <androidx.cardview.widget.CardView
         android:id="@+id/teacher_card"
         android:layout_width="300dp"
@@ -62,17 +66,19 @@
         android:layout_marginTop="30dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@id/student_card"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="onTeacherClick">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:padding="16dp">
+            android:padding="16dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="100dp"
@@ -90,6 +96,21 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Botón para cerrar sesión -->
+    <Button
+        android:id="@+id/sign_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cerrar_sesion"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
