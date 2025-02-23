@@ -43,10 +43,10 @@
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/student_logo"
-                android:contentDescription="@string/student_image_desc"/>
+                android:layout_width="122dp"
+                android:layout_height="111dp"
+                android:contentDescription="@string/student_image_desc"
+                android:src="@drawable/student_logo" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,24 +75,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             android:padding="16dp"
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/teacher_logo"
-                android:contentDescription="@string/teacher_image_desc"/>
+                android:layout_width="137dp"
+                android:layout_height="111dp"
+                android:contentDescription="@string/teacher_image_desc"
+                android:src="@drawable/teacher_logo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/teacher_role"
+                android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

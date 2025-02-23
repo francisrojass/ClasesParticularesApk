@@ -3,9 +3,7 @@ package com.example.clasesparticularesapp.auth
 import android.app.Activity
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.AuthCredential
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,24 +16,10 @@ class AuthManager(private val activity: Activity) {
 
     init {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("TU_CLIENT_ID_AQUI") // 🔹 Reemplaza esto con el Client ID de Firebase
+            .requestIdToken("clasesparticularesapp-6d90c")
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(activity, gso)
-    }
-
-    fun registerUser(email: String, password: String, callback: (Boolean, String?) -> Unit) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(activity) { task ->
-                callback(task.isSuccessful, task.exception?.message)
-            }
-    }
-
-    fun loginUser(email: String, password: String, callback: (Boolean, String?) -> Unit) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(activity) { task ->
-                callback(task.isSuccessful, task.exception?.message)
-            }
     }
 
     fun signInWithGoogle(callback: (Intent) -> Unit) {
@@ -55,15 +39,6 @@ class AuthManager(private val activity: Activity) {
         } catch (e: ApiException) {
             callback(false, "Error en el inicio de sesión con Google: ${e.message}")
         }
-    }
-
-    fun signOut(callback: () -> Unit) {
-        auth.signOut()
-        googleSignInClient.signOut().addOnCompleteListener { callback() }
-    }
-
-    fun getCurrentUser(): FirebaseUser? {
-        return auth.currentUser
     }
 }
 
