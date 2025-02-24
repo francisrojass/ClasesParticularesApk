@@ -37,10 +37,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/view_students_button"
+        android:id="@+id/manage_classes_button"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:text="@string/view_students"
+        android:text="@string/manage_classes"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -51,20 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"/>
 
-    <Button
-        android:id="@+id/manage_classes_button"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:text="@string/manage_classes"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/black"
-        android:elevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/view_students_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.teacher.NuevaClaseActivity">
+
+    <EditText
+        android:id="@+id/etNombreClase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la clase" />
+
+    <EditText
+        android:id="@+id/etHorario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Horario"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etLimiteAlumnos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Límite de alumnos"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:hint="Descripción"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btnGuardarClase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar Clase"
+        android:layout_marginTop="16dp"/>
+
+    <!-- RecyclerView para mostrar la lista de clases -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewClases"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

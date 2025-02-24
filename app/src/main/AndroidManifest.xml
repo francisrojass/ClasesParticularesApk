@@ -50,9 +50,14 @@
             android:name=".ui.teacher.TeacherActivity"
             android:exported="true"/>
 
+        <activity
+            android:name=".ui.teacher.MisClasesActivity"
+            android:exported="true"/>
+
+
+
     </application>
 
 </manifest>
-
 
 
