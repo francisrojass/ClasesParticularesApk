@@ -44,6 +44,7 @@
 
     <string name="teacher_welcome">Bienvenido, Profesor</string>
     <string name="manage_classes">Mis Clases</string>
+    <string name="edit_profile">Editar Perfil</string>
 
     <string name="default_web_client_id">TU_CLIENT_ID_AQUI</string>
     <string name="app_icon_desc">Clases Particulares</string>
@@ -59,5 +60,19 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    
+    <string name="save">Guardar</string>
+    <string name="discard">Descartar</string>
+    <string name="teacher_edit_profile">Mi perfil</string>
+    <string name="name">Nombre</string>
+    <string name="surnames">Apellidos</string>
+    <string name="subjects">Asignatura</string>
+
+    <string name="class_name">Nueva clase</string>
+    <string name="class_description">Descripcion</string>
+    <string name="class_price">Precio/Hora</string>
+    <string name="class_date">Fecha(dd/mm/aaaa)</string>
+    <string name="class_time">Horario(hh/mm)</string>
+
 </resources>
 

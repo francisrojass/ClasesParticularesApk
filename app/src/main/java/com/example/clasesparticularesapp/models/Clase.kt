@@ -5,6 +5,7 @@ data class Clase(
     val nombre: String = "",
     val horario: String = "", // Antes "fecha"
     val limiteAlumnos: Int = 0,
+    val precioXHora: Number = 0.0,
     val alumnosInscritos: List<String> = emptyList(),
     val profesorId: String = ""
 )
