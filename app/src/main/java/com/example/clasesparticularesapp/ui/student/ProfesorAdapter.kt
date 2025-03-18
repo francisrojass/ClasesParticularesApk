@@ -45,7 +45,7 @@ class ProfesorAdapter(private var profesores: List<Profesor>) :
 
             Glide.with(itemView.context)
                 .load(profesor.fotoUrl)
-                .placeholder(R.drawable.ic_profile)
+                //.placeholder(R.drawable.ic_profile)
                 .into(foto)
         }
     }

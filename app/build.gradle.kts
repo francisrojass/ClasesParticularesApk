@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp") version "1.5.30-1.0.0"
+    alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -68,7 +70,9 @@ dependencies {
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.play.services.auth)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx.v190)        
+    implementation(libs.androidx.core.ktx.v190)
     implementation(libs.material) // Material Design
+    implementation(libs.glide)
+    ksp(libs.compiler)
 
 }
