@@ -1,34 +1,62 @@
 package com.example.clasesparticularesapp.ui.student
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
-import com.example.clasesparticularesapp.MainActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.clasesparticularesapp.R
-import android.widget.ImageButton
+import com.example.clasesparticularesapp.models.Profesor
+import com.google.firebase.firestore.FirebaseFirestore
 
 class StudentActivity : AppCompatActivity() {
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: ProfesorAdapter
+    private val db = FirebaseFirestore.getInstance()
+    private var profesoresList = mutableListOf<Profesor>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
 
-        // Configurar el botón de retroceso
-        val backButton: ImageButton = findViewById(R.id.back_button)
-        backButton.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+        recyclerView = findViewById(R.id.recycler_view_professors)
 
-        // Manejar el evento de retroceso usando OnBackPressedDispatcher
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Inicia MainActivity y finaliza la actividad actual
-                val intent = Intent(this@StudentActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = ProfesorAdapter(profesoresList)
+        recyclerView.adapter = adapter
+
+        cargarProfesores()
+
+        findViewById<android.widget.EditText>(R.id.search_bar).addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                filtrarProfesores(s.toString())
             }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
     }
+
+    private fun cargarProfesores() {
+        db.collection("profesores")
+            .get()
+            .addOnSuccessListener { documents ->
+                profesoresList.clear()
+                for (document in documents) {
+                    val profesor = document.toObject(Profesor::class.java)
+                    profesoresList.add(profesor)
+                }
+                adapter.actualizarLista(profesoresList)
+            }
+    }
+
+    private fun filtrarProfesores(texto: String) {
+        val listaFiltrada = profesoresList.filter { it.nombre.contains(texto, true) }
+        adapter.actualizarLista(listaFiltrada)
+    }
 }
+
+
 
 
