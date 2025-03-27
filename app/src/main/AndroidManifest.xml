@@ -50,11 +50,18 @@
             android:name=".ui.teacher.TeacherActivity"
             android:exported="true"/>
 
+        <!--
         <activity
             android:name=".ui.teacher.MisClasesActivity"
             android:exported="true"/>
+        -->
+        <activity
+            android:name=".ui.teacher.EditProfileActivity"
+            android:exported="true"/>
 
-
+        <activity
+            android:name=".ui.teacher.MisClasesAdapter"
+            android:exported="true"/>
 
     </application>
 

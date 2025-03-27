@@ -32,7 +32,13 @@ class TeacherActivity : AppCompatActivity() {
         // ✅ Configurar el botón "Mis Clases"
         val misClasesButton: Button = findViewById(R.id.manage_classes_button) // Asegúrate de que el ID coincide
         misClasesButton.setOnClickListener {
-            val intent = Intent(this, MisClasesActivity::class.java)
+            val intent = Intent(this, MisClasesAdapter::class.java)
+            startActivity(intent)
+        }
+
+        val editarPerfilButton: Button = findViewById(R.id.editarPerfil) // Asegúrate de que el ID coincide
+        editarPerfilButton.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
         }
     }
