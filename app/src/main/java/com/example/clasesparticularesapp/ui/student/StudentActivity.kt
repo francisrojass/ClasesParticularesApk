@@ -7,12 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clasesparticularesapp.R
+import com.example.clasesparticularesapp.models.Clase
 import com.example.clasesparticularesapp.models.Profesor
 import com.google.firebase.firestore.FirebaseFirestore
 
 class StudentActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: ProfesorAdapter
+    private lateinit var adapter: ClassAdapter
     private val db = FirebaseFirestore.getInstance()
     private var profesoresList = mutableListOf<Profesor>()
 
@@ -23,14 +24,14 @@ class StudentActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view_professors)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ProfesorAdapter(profesoresList)
+        adapter = ClassAdapter(profesoresList)  // Aquí usas el adaptador de clases
         recyclerView.adapter = adapter
 
-        cargarProfesores()
+        cargarClases()  // Llamamos a cargar las clases desde Firestore
 
         findViewById<android.widget.EditText>(R.id.search_bar).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filtrarProfesores(s.toString())
+                filtrarClases(s.toString())  // Filtrar clases en vez de profesores
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -38,20 +39,20 @@ class StudentActivity : AppCompatActivity() {
         })
     }
 
-    private fun cargarProfesores() {
-        db.collection("profesores")
+    private fun cargarClases() {
+        db.collection("clases")
             .get()
             .addOnSuccessListener { documents ->
-                profesoresList.clear()
+                profesoresList.clear()  // Puedes renombrar esta lista si la utilizas para clases
                 for (document in documents) {
-                    val profesor = document.toObject(Profesor::class.java)
-                    profesoresList.add(profesor)
+                    val clase = document.toObject(Clase::class.java) // Cambiar Profesor a ClassParticular
+                    profesoresList.add(clase) // También puedes renombrar esta lista a clasesList
                 }
-                adapter.actualizarLista(profesoresList)
+                adapter.actualizarLista(profesoresList) // Actualizar el adapter con las clases
             }
     }
 
-    private fun filtrarProfesores(texto: String) {
+    private fun filtrarClases(texto: String) {
         val listaFiltrada = profesoresList.filter { it.nombre.contains(texto, true) }
         adapter.actualizarLista(listaFiltrada)
     }

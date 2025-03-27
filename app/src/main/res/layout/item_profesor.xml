@@ -43,10 +43,24 @@
                 android:textSize="14sp"/>
 
             <TextView
+                android:id="@+id/profesor_horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horario"
+                android:textSize="14sp"/>
+
+            <TextView
                 android:id="@+id/profesor_precio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Precio por hora"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/profesor_limite_alumnos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Limite de alumnos"
                 android:textSize="14sp"/>
 
             <TextView
