@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.clasesparticularesapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.example.clasesparticularesapp.models.Clase
 
 class NuevaClaseActivity : AppCompatActivity() {
 
     private lateinit var etNombreClase: EditText
     private lateinit var etHorario: EditText
     private lateinit var etLimiteAlumnos: EditText
+    private lateinit var etDescripcion: EditText
     private lateinit var btnGuardarClase: Button
 
     private val db = FirebaseFirestore.getInstance()
@@ -26,6 +28,7 @@ class NuevaClaseActivity : AppCompatActivity() {
         etNombreClase = findViewById(R.id.etNombreClase)
         etHorario = findViewById(R.id.etHorario)
         etLimiteAlumnos = findViewById(R.id.etLimiteAlumnos)
+        etDescripcion = findViewById(R.id.etDescripcion)
         btnGuardarClase = findViewById(R.id.btnGuardarClase)
 
         btnGuardarClase.setOnClickListener {
@@ -36,10 +39,17 @@ class NuevaClaseActivity : AppCompatActivity() {
     private fun guardarClase() {
         val nombre = etNombreClase.text.toString().trim()
         val horario = etHorario.text.toString().trim()
-        val limiteAlumnos = etLimiteAlumnos.text.toString().trim().toIntOrNull()
+        val limiteAlumnosStr = etLimiteAlumnos.text.toString().trim()
+        val descripcion = etDescripcion.text.toString().trim()
 
-        if (nombre.isEmpty() || horario.isEmpty() || limiteAlumnos == null) {
+        if (nombre.isEmpty() || horario.isEmpty() || limiteAlumnosStr.isEmpty() || descripcion.isEmpty()) {
             Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val limiteAlumnos = limiteAlumnosStr.toIntOrNull()
+        if (limiteAlumnos == null) {
+            Toast.makeText(this, "El límite de alumnos debe ser un número", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -49,11 +59,13 @@ class NuevaClaseActivity : AppCompatActivity() {
             return
         }
 
-        val nuevaClase = hashMapOf(
-            "nombre" to nombre,
-            "horario" to horario,
-            "limiteAlumnos" to limiteAlumnos,
-            "profesorId" to userId
+        val nuevaClase = Clase(
+            id = "",
+            nombre = nombre,
+            descripcion = descripcion,
+            horario = horario,
+            limiteAlumnos = limiteAlumnos,
+            profesorId = userId
         )
 
         db.collection("clases").add(nuevaClase)
