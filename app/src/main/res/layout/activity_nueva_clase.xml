@@ -1,45 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/white"
     tools:context=".ui.teacher.NuevaClaseActivity">
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="40dp"
+        android:layout_height="43dp"
+        android:layout_margin="16dp"
+        android:background="@color/white"
+        android:contentDescription="@string/back"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTituloNuevaClase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Nueva Clase"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button" />
 
     <EditText
         android:id="@+id/etNombreClase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre de la clase" />
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Nombre de la clase"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloNuevaClase" />
+
+    <EditText
+        android:id="@+id/etAsignatura"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/subjects"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNombreClase" />
+
+    <EditText
+        android:id="@+id/etPrecioHora"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_price"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAsignatura" />
+
+
+    <EditText
+        android:id="@+id/etFecha"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_date"
+        android:inputType="date"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPrecioHora" />
 
     <EditText
         android:id="@+id/etHorario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Horario"
-        android:inputType="text" />
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_time"
+        android:inputType="time"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etFecha" />
 
     <EditText
         android:id="@+id/etLimiteAlumnos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
         android:hint="Límite de alumnos"
-        android:inputType="number" />
+        android:inputType="number"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etHorario" />
 
     <EditText
         android:id="@+id/etDescripcion"
-        android:layout_width="match_parent"
+        android:layout_width="296dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_description"
+        android:inputType="textMultiLine"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etLimiteAlumnos" />
+
+    <Button
+        android:id="@+id/btnDescartarClase"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Descripción"
-        android:inputType="textMultiLine" />
+        android:layout_marginTop="32dp"
+        android:text="@string/discard"
+        app:layout_constraintEnd_toStartOf="@id/btnGuardarClase"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
 
     <Button
         android:id="@+id/btnGuardarClase"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar Clase"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="32dp"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnDescartarClase"
+        app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
