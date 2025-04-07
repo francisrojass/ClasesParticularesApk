@@ -22,7 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Botón Descartar -->
     <Button
         android:id="@+id/btnGuardarCambiosPerfil"
         android:layout_width="wrap_content"
@@ -99,19 +98,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNombre" />
 
-    <EditText
-        android:id="@+id/etAsignatura"
+    <TextView
+        android:id="@+id/tvAsignaturas"
         android:layout_width="295dp"
         android:layout_height="39dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_border"
+        android:background="@drawable/spinner_background"
+        android:drawableRight="@drawable/ic_arrow_drop_down"
         android:hint="@string/subjects"
         android:padding="12dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etApellidos" />
+        app:layout_constraintTop_toBottomOf="@id/etApellidos"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

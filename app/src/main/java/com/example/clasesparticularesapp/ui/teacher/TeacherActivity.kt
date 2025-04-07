@@ -8,11 +8,43 @@ import com.example.clasesparticularesapp.MainActivity
 import com.example.clasesparticularesapp.R
 import android.widget.ImageButton
 import android.widget.Button
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class TeacherActivity : AppCompatActivity() {
+
+    private lateinit var tvBienvenida: TextView
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher)
+
+        tvBienvenida = findViewById(R.id.teacher_title)
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
+        val userId = auth.currentUser?.uid
+
+        if (userId != null) {
+            firestore.collection("profesores").document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val nombre = document.getString("nombre") ?: ""
+                        tvBienvenida.text = "Bienvenido, $nombre"
+                    } else {
+                        tvBienvenida.text = "Bienvenido"
+                    }
+                }
+                .addOnFailureListener {
+                    tvBienvenida.text = "Bienvenido"
+                }
+        } else {
+            tvBienvenida.text = "Bienvenido"
+        }
 
         // Configurar el botón de retroceso
         val backButton: ImageButton = findViewById(R.id.back_button)
