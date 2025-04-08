@@ -22,13 +22,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Botón Descartar -->
     <Button
         android:id="@+id/btnGuardarCambiosPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="616dp"
+        android:layout_marginEnd="56dp"
         android:text="@string/save"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +37,8 @@
         android:id="@+id/btnDescartarCambiosPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="616dp"
+        android:layout_marginEnd="84dp"
         android:text="@string/discard"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/btnGuardarCambiosPerfil"
@@ -68,14 +67,14 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_profile_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/back_button" />
 
     <EditText
         android:id="@+id/etNombre"
-        android:layout_width="295dp"
-        android:layout_height="39dp"
+        android:layout_width="297dp"
+        android:layout_height="58dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/edittext_border"
         android:hint="@string/name"
@@ -88,8 +87,8 @@
 
     <EditText
         android:id="@+id/etApellidos"
-        android:layout_width="295dp"
-        android:layout_height="39dp"
+        android:layout_width="297dp"
+        android:layout_height="67dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edittext_border"
         android:hint="@string/surnames"
@@ -99,19 +98,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNombre" />
 
-    <EditText
-        android:id="@+id/etAsignatura"
-        android:layout_width="295dp"
-        android:layout_height="39dp"
+    <TextView
+        android:id="@+id/tvAsignaturas"
+        android:layout_width="300dp"
+        android:layout_height="67dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/edittext_border"
+        android:background="@drawable/spinner_background"
+        android:drawableRight="@drawable/ic_arrow_drop_down"
         android:hint="@string/subjects"
         android:padding="12dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etApellidos" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

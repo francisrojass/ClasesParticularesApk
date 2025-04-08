@@ -2,17 +2,33 @@ package com.example.clasesparticularesapp.ui.teacher
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clasesparticularesapp.MainActivity
 import com.example.clasesparticularesapp.R
 import android.widget.ImageButton
 import android.widget.Button
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import android.util.Log
 
 class TeacherActivity : AppCompatActivity() {
+
+    private lateinit var tvBienvenida: TextView
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher)
+        Log.d("TeacherActivity", "onCreate() llamado")
+
+        tvBienvenida = findViewById(R.id.teacher_title)
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
+        val userId = auth.currentUser?.uid
+        cargarDatosPerfil(userId)
 
         // Configurar el botón de retroceso
         val backButton: ImageButton = findViewById(R.id.back_button)
@@ -20,14 +36,14 @@ class TeacherActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // Manejar el evento de retroceso usando OnBackPressedDispatcher
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val intent = Intent(this@TeacherActivity, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        })
+        // ✅ ELIMINADO: Manejo específico del botón de retroceso del sistema
+        // onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+        //     override fun handleOnBackPressed() {
+        //         val intent = Intent(this@TeacherActivity, MainActivity::class.java)
+        //         startActivity(intent)
+        //         finish()
+        //     }
+        // })
 
         // ✅ Configurar el botón "Mis Clases"
         val misClasesButton: Button = findViewById(R.id.manage_classes_button) // Asegúrate de que el ID coincide
@@ -40,6 +56,37 @@ class TeacherActivity : AppCompatActivity() {
         editarPerfilButton.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("TeacherActivity", "onResume() llamado")
+        val userId = auth.currentUser?.uid
+        cargarDatosPerfil(userId)
+    }
+
+    private fun cargarDatosPerfil(userId: String?) {
+        if (userId != null) {
+            firestore.collection("profesores").document(userId)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val nombre = document.getString("nombre") ?: ""
+                        tvBienvenida.text = "Bienvenido, $nombre"
+                        // Aquí podrías actualizar otros TextViews si los tuvieras en este layout
+                    } else {
+                        tvBienvenida.text = "Bienvenido"
+                        // Actualizar otros TextViews a valores por defecto si es necesario
+                    }
+                }
+                .addOnFailureListener {
+                    tvBienvenida.text = "Bienvenido"
+                    // Manejar el error al cargar los datos
+                }
+        } else {
+            tvBienvenida.text = "Bienvenido"
+            // Establecer otros TextViews a valores por defecto si no hay usuario
         }
     }
 }

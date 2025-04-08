@@ -16,8 +16,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         android:background="@color/white"
-        android:contentDescription="@string/back"
-        android:scaleType="centerInside"
+        android:contentDescription="@string/back" android:scaleType="centerInside"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,16 +38,15 @@
         android:id="@+id/teacher_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
-        android:text="@string/teacher_welcome"
+        android:layout_marginTop="60dp"
+        android:text="Bienvenido"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgPerfil"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imgPerfil" />
 
     <Button
         android:id="@+id/manage_classes_button"
@@ -72,4 +70,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
