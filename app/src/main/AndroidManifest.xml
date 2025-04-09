@@ -50,11 +50,16 @@
             android:name=".ui.teacher.TeacherActivity"
             android:exported="true"/>
 
+
         <activity
             android:name=".ui.teacher.MisClasesActivity"
             android:exported="true"/>
+        <activity android:name=".ui.teacher.NuevaClaseActivity"
+            android:exported="false" />
 
-
+        <activity
+            android:name=".ui.teacher.EditProfileActivity"
+            android:exported="true"/>
 
     </application>
 

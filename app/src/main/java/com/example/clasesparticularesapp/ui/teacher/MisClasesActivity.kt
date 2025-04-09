@@ -1,13 +1,15 @@
 package com.example.clasesparticularesapp.ui.teacher
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clasesparticularesapp.R
 import com.example.clasesparticularesapp.models.Clase
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
@@ -19,72 +21,35 @@ class MisClasesActivity : AppCompatActivity() {
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
     private val clasesList = mutableListOf<Clase>()
-
-    private lateinit var nombreClaseInput: EditText
-    private lateinit var descripcionClaseInput: EditText
-    private lateinit var horarioClaseInput: EditText
-    private lateinit var limiteAlumnosInput: EditText
-    private lateinit var btnAgregarClase: Button
+    private lateinit var backButtonMisClases: ImageButton // Declarar el ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nueva_clase)
+        setContentView(R.layout.activity_mis_clases)
 
-        // Inicializar los EditText
-        nombreClaseInput = findViewById(R.id.etNombreClase)
-        descripcionClaseInput = findViewById(R.id.etDescripcion)
-        horarioClaseInput = findViewById(R.id.etHorario)
+        // Inicializar el botón de retroceso (si aún no lo has hecho)
+        backButtonMisClases = findViewById(R.id.backButtonMisClases)
+        backButtonMisClases.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
-
-        // RecyclerView
         recyclerView = findViewById(R.id.recyclerViewClases)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MisClasesAdapter(clasesList)
+        adapter = MisClasesAdapter(clasesList, this)
         recyclerView.adapter = adapter
 
-
-        // Botón para agregar clase
-        btnAgregarClase = findViewById(R.id.btnGuardarClase)
-        btnAgregarClase.setOnClickListener {
-            agregarClase()
+        val fabAgregarClase: FloatingActionButton? = findViewById(R.id.fabAgregarClase)
+        fabAgregarClase?.setOnClickListener {
+            val intent = Intent(this, NuevaClaseActivity::class.java)
+            startActivity(intent)
         }
 
         cargarClases()
     }
 
-    private fun agregarClase() {
-        val userId = auth.currentUser?.uid ?: return
-        val nombre = nombreClaseInput.text.toString().trim()
-        val descripcion = descripcionClaseInput.text.toString().trim()
-        val fecha = horarioClaseInput.text.toString().trim()
-        val horario = horarioClaseInput.text.toString().trim()
-        val limiteAlumnos = limiteAlumnosInput.text.toString().trim().toIntOrNull() ?: 0
-
-        if (nombre.isEmpty() || descripcion.isEmpty() || fecha.isEmpty()) {
-            return
-        }
-
-
-
-        val nuevaClase = Clase(
-            id = "",
-            nombre = nombre,
-            horario = horario,
-            limiteAlumnos = limiteAlumnos,
-            profesorId = userId
-        )
-
-        // Guardar en Firestore
-        db.collection("clases").add(nuevaClase)
-            .addOnSuccessListener { documentReference ->
-                nuevaClase.id = documentReference.id
-                clasesList.add(nuevaClase)
-                adapter.notifyItemInserted(clasesList.size - 1)
-                limpiarCampos()
-            }
-            .addOnFailureListener {
-                println("Error al agregar la clase: ${it.message}")
-            }
+    override fun onResume() {
+        super.onResume()
+        cargarClases() // Recargar la lista cuando se vuelve a esta actividad
     }
 
     private fun cargarClases() {
@@ -101,14 +66,9 @@ class MisClasesActivity : AppCompatActivity() {
                 }
                 adapter.notifyDataSetChanged()
             }
-            .addOnFailureListener {
-                println("Error al cargar las clases: ${it.message}")
+            .addOnFailureListener { e ->
+                println("Error al cargar las clases: ${e.message}")
+                Toast.makeText(this, "Error al cargar las clases: ${e.message}", Toast.LENGTH_LONG).show()
             }
-    }
-
-    private fun limpiarCampos() {
-        nombreClaseInput.text.clear()
-        descripcionClaseInput.text.clear()
-        horarioClaseInput.text.clear()
     }
 }

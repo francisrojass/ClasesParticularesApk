@@ -15,7 +15,7 @@ class StudentActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ClassAdapter
     private val db = FirebaseFirestore.getInstance()
-    private var profesoresList = mutableListOf<Profesor>()
+    private var clasesList = mutableListOf<Clase>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class StudentActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view_professors)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ClassAdapter(profesoresList)  // Aquí usas el adaptador de clases
+        adapter = ClassAdapter(clasesList)  // Aquí usas el adaptador de clases
         recyclerView.adapter = adapter
 
         cargarClases()  // Llamamos a cargar las clases desde Firestore
@@ -43,17 +43,17 @@ class StudentActivity : AppCompatActivity() {
         db.collection("clases")
             .get()
             .addOnSuccessListener { documents ->
-                profesoresList.clear()  // Puedes renombrar esta lista si la utilizas para clases
+                clasesList.clear()  // Puedes renombrar esta lista si la utilizas para clases
                 for (document in documents) {
                     val clase = document.toObject(Clase::class.java) // Cambiar Profesor a ClassParticular
-                    profesoresList.add(clase) // También puedes renombrar esta lista a clasesList
+                    clasesList.add(clase) // También puedes renombrar esta lista a clasesList
                 }
-                adapter.actualizarLista(profesoresList) // Actualizar el adapter con las clases
+                adapter.actualizarLista(clasesList) // Actualizar el adapter con las clases
             }
     }
 
     private fun filtrarClases(texto: String) {
-        val listaFiltrada = profesoresList.filter { it.nombre.contains(texto, true) }
+        val listaFiltrada = clasesList.filter { it.nombre.contains(texto, true) }
         adapter.actualizarLista(listaFiltrada)
     }
 }

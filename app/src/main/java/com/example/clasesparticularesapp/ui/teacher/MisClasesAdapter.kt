@@ -3,25 +3,25 @@ package com.example.clasesparticularesapp.ui.teacher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clasesparticularesapp.R
 import com.example.clasesparticularesapp.models.Clase
+import com.google.firebase.firestore.FirebaseFirestore
 
-class MisClasesAdapter(private val clases: List<Clase>) : RecyclerView.Adapter<MisClasesAdapter.ViewHolder>() {
+class MisClasesAdapter(private val clases: MutableList<Clase>, private val activity: MisClasesActivity) : RecyclerView.Adapter<MisClasesAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nombreClase: TextView = view.findViewById(R.id.nombreClase)
-        val horarioClase: TextView = view.findViewById(R.id.horarioClase)
-        val alumnosInscritos: TextView = view.findViewById(R.id.alumnosInscritos)
-        val btnEditar: Button = view.findViewById(R.id.btnEditarClase)
-        val btnEliminar: Button = view.findViewById(R.id.btnEliminarClase)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nombreClase: TextView = itemView.findViewById(R.id.tvNombreClase)
+        val horarioClase: TextView = itemView.findViewById(R.id.tvHorarioClase)
+        val eliminarClase: ImageView = itemView.findViewById(R.id.ivEliminarClase)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_clase, parent, false)
+            .inflate(R.layout.item_clase_lista, parent, false) // Asegúrate de que este es el layout correcto CON el icono de la papelera
         return ViewHolder(view)
     }
 
@@ -29,17 +29,33 @@ class MisClasesAdapter(private val clases: List<Clase>) : RecyclerView.Adapter<M
         val clase = clases[position]
         holder.nombreClase.text = clase.nombre
         holder.horarioClase.text = "Horario: ${clase.horario}"
-        holder.alumnosInscritos.text = "Inscritos: ${clase.alumnosInscritos.size}/${clase.limiteAlumnos}"
 
-        // Acciones de editar y eliminar (Por ahora solo mostramos mensajes)
-        holder.btnEditar.setOnClickListener {
-            println("Editar clase: ${clase.nombre}")
+        holder.eliminarClase.setOnClickListener {
+            val claseIdToDelete = clase.id
+            if (claseIdToDelete.isNotEmpty()) {
+                eliminarClaseDeFirebase(claseIdToDelete, position)
+            } else {
+                Toast.makeText(holder.itemView.context, "Error: ID de clase no válido", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
 
-        holder.btnEliminar.setOnClickListener {
-            println("Eliminar clase: ${clase.nombre}")
-        }
+    private fun eliminarClaseDeFirebase(claseId: String, position: Int) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("clases")
+            .document(claseId)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(activity, "Clase eliminada correctamente", Toast.LENGTH_SHORT).show()
+                clases.removeAt(position) // Eliminar de la lista local
+                notifyItemRemoved(position) // Notificar al RecyclerView la eliminación
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(activity, "Error al eliminar la clase: ${e.message}", Toast.LENGTH_LONG).show()
+                println("Error al eliminar la clase: $e")
+            }
     }
 
     override fun getItemCount() = clases.size
 }
+

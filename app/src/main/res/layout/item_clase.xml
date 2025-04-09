@@ -1,24 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.teacher.NuevaClaseActivity">
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="40dp"
+        android:layout_height="43dp"
+        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/white"
+        android:contentDescription="@string/back"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/nombreClase"
+        android:id="@+id/tvNombreClase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre de la Clase"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:layout_marginTop="110dp"
+        android:text="@string/class_name"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/horarioClase"
+    <EditText
+        android:id="@+id/etAsignatura"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/subjects"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNombreClase" />
+
+    <EditText
+        android:id="@+id/etPrecioHora"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_price"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAsignatura" />
+
+
+    <EditText
+        android:id="@+id/etFecha"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_date"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPrecioHora" />
+
+    <EditText
+        android:id="@+id/etHorario"
+        android:layout_width="295dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_time"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etFecha" />
+
+    <EditText
+        android:id="@+id/etDescripcion"
+        android:layout_width="296dp"
+        android:layout_height="114dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="@string/class_description"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etHorario" />
+
+    <Button
+        android:id="@+id/btnDescartarClase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Horario: "/>
+        android:layout_marginTop="60dp"
+        android:text="@string/discard"
+        app:layout_constraintEnd_toStartOf="@id/btnGuardarClase"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
 
+    <Button
+        android:id="@+id/btnGuardarClase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/save"
+        app:layout_constraintStart_toEndOf="@id/btnDescartarClase"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDescripcion" />
+
+
+
+
+    <!--
     <TextView
         android:id="@+id/alumnosInscritos"
         android:layout_width="wrap_content"
@@ -36,4 +148,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Eliminar" />
-</LinearLayout>
+    -->
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,45 +13,60 @@
         android:layout_width="40dp"
         android:layout_height="43dp"
         android:layout_margin="16dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:background="@color/white"
-        android:contentDescription="@string/back"
-        android:scaleType="centerInside"
+        android:contentDescription="@string/back" android:scaleType="centerInside"
         android:src="@drawable/ic_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgPerfil"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back_button" />
 
     <TextView
         android:id="@+id/teacher_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/teacher_welcome"
+        android:layout_marginTop="60dp"
+        android:text="Bienvenido"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imgPerfil" />
 
     <Button
         android:id="@+id/manage_classes_button"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/manage_classes"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/black"
-        android:elevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/teacher_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="20dp"/>
 
+    <Button
+        android:id="@+id/editarPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/edit_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manage_classes_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
