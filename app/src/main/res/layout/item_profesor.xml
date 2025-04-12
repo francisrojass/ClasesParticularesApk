@@ -17,7 +17,7 @@
             android:id="@+id/profesor_foto"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/ic_profile"
+            android:src="@drawable/ic_profile_placeholder"
             android:contentDescription="Foto del profesor"/>
 
         <LinearLayout

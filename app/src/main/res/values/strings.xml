@@ -74,5 +74,8 @@
     <string name="class_date">Fecha(dd/mm/aaaa)</string>
     <string name="class_time">Horario(hh/mm)</string>
 
+    <string name="profile">Perfil</string>
+    <string name="search_teachers">Buscar profesores...</string>
+
 </resources>
 
