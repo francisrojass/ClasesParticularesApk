@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToActivity(destination: Class<*>) {
         val intent = Intent(this, destination)
         startActivity(intent)
-        finish()
+
     }
 
     private fun signOut() {

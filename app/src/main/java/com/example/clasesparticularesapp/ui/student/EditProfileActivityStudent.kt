@@ -16,6 +16,7 @@ class EditProfileActivityStudent : AppCompatActivity() {
     private lateinit var nombreEdit: EditText
     private lateinit var apellidosEdit: EditText
     private lateinit var asignaturasView: TextView
+    private lateinit var backButton: ImageButton // Declarar el ImageButton
 
     private val asignaturasDisponibles = listOf("Matemáticas", "Física", "Inglés", "Química", "Historia")
     private val seleccionadas = mutableListOf<String>()
@@ -28,9 +29,17 @@ class EditProfileActivityStudent : AppCompatActivity() {
         nombreEdit = findViewById(R.id.edit_nombre)
         apellidosEdit = findViewById(R.id.edit_apellidos)
         asignaturasView = findViewById(R.id.edit_asignaturas)
+        backButton = findViewById(R.id.back_button) // Inicializar el ImageButton
 
         val btnGuardar = findViewById<Button>(R.id.btn_guardar)
         val btnCancelar = findViewById<Button>(R.id.btn_cancelar)
+
+        // Configurar el OnClickListener para el botón de retroceso
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+            // O puedes usar la forma explícita:
+            // finish()
+        }
 
         // Abrir el diálogo al pulsar el campo
         asignaturasView.setOnClickListener {

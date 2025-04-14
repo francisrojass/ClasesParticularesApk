@@ -1,15 +1,16 @@
 package com.example.clasesparticularesapp.ui.student
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clasesparticularesapp.R
 import com.example.clasesparticularesapp.models.Clase
 import com.google.firebase.firestore.FirebaseFirestore
-import android.content.Intent
 import android.widget.ImageView
 
 
@@ -24,16 +25,15 @@ class StudentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_student)
 
         recyclerView = findViewById(R.id.recycler_view_professors)
-
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ClassAdapter(clasesList)  // Aquí usas el adaptador de clases
+        adapter = ClassAdapter(clasesList)
         recyclerView.adapter = adapter
 
-        cargarClases()  // Llamamos a cargar las clases desde Firestore
+        cargarClases()
 
         findViewById<android.widget.EditText>(R.id.search_bar).addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                filtrarClases(s.toString())  // Filtrar clases en vez de profesores
+                filtrarClases(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -45,18 +45,23 @@ class StudentActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val backButton: ImageButton = findViewById(R.id.back_button)
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+
+        }
     }
 
     private fun cargarClases() {
         db.collection("clases")
             .get()
             .addOnSuccessListener { documents ->
-                clasesList.clear()  // Puedes renombrar esta lista si la utilizas para clases
+                clasesList.clear()
                 for (document in documents) {
-                    val clase = document.toObject(Clase::class.java) // Cambiar Profesor a ClassParticular
-                    clasesList.add(clase) // También puedes renombrar esta lista a clasesList
+                    val clase = document.toObject(Clase::class.java)
+                    clasesList.add(clase)
                 }
-                adapter.actualizarLista(clasesList) // Actualizar el adapter con las clases
+                adapter.actualizarLista(clasesList)
             }
     }
 
@@ -65,7 +70,6 @@ class StudentActivity : AppCompatActivity() {
         adapter.actualizarLista(listaFiltrada)
     }
 }
-
 
 
 

@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
-    id("com.google.devtools.ksp") version "1.5.30-1.0.0"
     alias(libs.plugins.kotlin.kapt)
 }
 
@@ -64,15 +63,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.play.services.auth)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx.v190)
-    implementation(libs.material) // Material Design
+    implementation(libs.material)
     implementation(libs.glide)
-    ksp(libs.compiler)
+    implementation(libs.cardview)
+    //ksp(libs.compiler)
 
 }
