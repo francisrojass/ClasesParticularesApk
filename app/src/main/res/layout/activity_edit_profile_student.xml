@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.student.EditProfileActivityStudent">
+
+    <!-- Botón atrás -->
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="40dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:background="@color/white"
+        android:contentDescription="@string/back"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tituloEditarPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Editar perfil"
+        android:textColor="@color/black"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Imagen de perfil -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/circle_background"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_profile_placeholder"
+        android:contentDescription="@string/profile"
+        app:layout_constraintTop_toBottomOf="@id/tituloEditarPerfil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Nombre -->
+    <EditText
+        android:id="@+id/edit_nombre"
+        android:layout_width="297dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Nombre"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Apellidos -->
+    <EditText
+        android:id="@+id/edit_apellidos"
+        android:layout_width="297dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_border"
+        android:hint="Apellidos"
+        android:padding="12dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/edit_nombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Asignaturas (MultiAutoCompleteTextView con estilo de TextView) -->
+    <TextView
+        android:id="@+id/edit_asignaturas"
+        android:layout_width="300dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/spinner_background"
+        android:drawableEnd="@drawable/ic_arrow_drop_down"
+        android:hint="Asignaturas"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:gravity="center_vertical"
+        android:inputType="none"
+        app:layout_constraintTop_toBottomOf="@id/edit_apellidos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <!-- Botón Guardar -->
+    <Button
+        android:id="@+id/btn_guardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Guardar"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/edit_asignaturas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_cancelar" />
+
+    <!-- Botón Cancelar -->
+    <Button
+        android:id="@+id/btn_cancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Cancelar"
+        android:textSize="14sp"
+        android:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/btn_guardar"
+        app:layout_constraintEnd_toStartOf="@id/btn_guardar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
