@@ -1,5 +1,6 @@
 package com.example.clasesparticularesapp.ui.teacher
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,19 @@ class MisClasesAdapter(private val clases: MutableList<Clase>, private val activ
         holder.nombreClase.text = clase.nombre
         holder.horarioClase.text = "Horario: ${clase.horario}"
 
-        holder.eliminarClase.setOnClickListener {
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetalleClaseActivity::class.java).apply {
+                putExtra("nombre", clase.nombre)
+                putExtra("asignatura", clase.asignatura)
+                putExtra("descripcion", clase.descripcion)
+                putExtra("fecha", clase.fecha)
+                putExtra("horario", clase.horario)
+                putExtra("limiteAlumnos", clase.limiteAlumnos)
+                putExtra("precioHora", clase.precioHora)
+            }
+            holder.itemView.context.startActivity(intent)
+        }
+            holder.eliminarClase.setOnClickListener {
             val claseIdToDelete = clase.id
             if (claseIdToDelete.isNotEmpty()) {
                 eliminarClaseDeFirebase(claseIdToDelete, position)

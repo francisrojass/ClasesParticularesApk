@@ -62,6 +62,10 @@
             android:exported="true"/>
 
         <activity
+            android:name=".ui.teacher.DetalleClaseActivity"
+            android:exported="true" />
+      
+        <activity
             android:name=".ui.student.EditProfileActivityStudent"/>
 
     </application>
