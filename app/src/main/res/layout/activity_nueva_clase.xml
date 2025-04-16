@@ -45,16 +45,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTituloNuevaClase" />
 
-    <EditText
-        android:id="@+id/etAsignatura"
-        android:layout_width="295dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_border"
+    <TextView
+        android:id="@+id/tvAsignaturaClase"
+        android:layout_width="297dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/spinner_background"
+        android:drawableRight="@drawable/ic_arrow_drop_down"
         android:hint="@string/subjects"
         android:padding="12dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNombreClase" />
 
@@ -71,7 +73,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etAsignatura" />
+        app:layout_constraintTop_toBottomOf="@id/tvAsignaturaClase" />
 
 
     <EditText
@@ -138,7 +140,7 @@
         android:id="@+id/btnDescartarClase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:text="@string/discard"
         app:layout_constraintEnd_toStartOf="@id/btnGuardarClase"
         app:layout_constraintStart_toStartOf="parent"
