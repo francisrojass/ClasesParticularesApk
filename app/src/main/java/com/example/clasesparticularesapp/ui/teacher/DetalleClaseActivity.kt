@@ -1,6 +1,7 @@
 package com.example.clasesparticularesapp.ui.teacher
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -27,5 +28,14 @@ class DetalleClaseActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvHorario).text = "Horario: $horario"
         findViewById<TextView>(R.id.tvLimite).text = "Límite de alumnos: $limite"
         findViewById<TextView>(R.id.tvPrecio).text = "Precio por hora: $precio €"
+
+
+        val backButton: ImageButton = findViewById(R.id.back_button)
+
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+            // O puedes usar la forma explícita:
+            // finish()
+        }
     }
 }
