@@ -22,8 +22,8 @@ class NuevaClaseActivity : AppCompatActivity() {
     private lateinit var etNombreClase: EditText
     private lateinit var tvAsignaturaClase: TextView
     private lateinit var etPrecioHora: EditText
-    private lateinit var etFecha: EditText
-    private lateinit var etHorario: EditText
+    private lateinit var tvFecha: TextView
+    private lateinit var tvHorario: TextView
     private lateinit var etLimiteAlumnos: EditText
     private lateinit var etDescripcion: EditText
     private lateinit var btnGuardarClase: Button
@@ -43,16 +43,16 @@ class NuevaClaseActivity : AppCompatActivity() {
         etNombreClase = findViewById(R.id.etNombreClase)
         tvAsignaturaClase = findViewById(R.id.tvAsignaturaClase)
         etPrecioHora = findViewById(R.id.etPrecioHora)
-        etFecha = findViewById(R.id.etFecha)
-        etHorario = findViewById(R.id.etHorario)
+        tvFecha = findViewById(R.id.tvFecha)
+        tvHorario = findViewById(R.id.tvHorario)
         etLimiteAlumnos = findViewById(R.id.etLimiteAlumnos)
         etDescripcion = findViewById(R.id.etDescripcion)
         btnGuardarClase = findViewById(R.id.btnGuardarClase)
         btnDescartarClase = findViewById(R.id.btnDescartarClase)
         backButton = findViewById(R.id.back_button)
 
-        etFecha.inputType = InputType.TYPE_NULL
-        etFecha.setOnClickListener {
+        tvFecha.inputType = InputType.TYPE_NULL
+        tvFecha.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -60,21 +60,21 @@ class NuevaClaseActivity : AppCompatActivity() {
 
             val datePicker = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
                 val fechaFormateada = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-                etFecha.setText(fechaFormateada)
+                tvFecha.setText(fechaFormateada)
             }, year, month, day)
 
             datePicker.show()
         }
 
-        etHorario.inputType = InputType.TYPE_NULL
-        etHorario.setOnClickListener {
+        tvHorario.inputType = InputType.TYPE_NULL
+        tvHorario.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val minute = calendar.get(Calendar.MINUTE)
 
             val timePicker = TimePickerDialog(this, { _, selectedHour, selectedMinute ->
                 val horaFormateada = String.format("%02d:%02d", selectedHour, selectedMinute)
-                etHorario.setText(horaFormateada)
+                tvHorario.setText(horaFormateada)
             }, hour, minute, true) // true para formato 24h
 
             timePicker.show()
@@ -120,8 +120,8 @@ class NuevaClaseActivity : AppCompatActivity() {
         val nombre = etNombreClase.text.toString().trim()
         val asignatura = tvAsignaturaClase.text.toString().trim()
         val precioHoraStr = etPrecioHora.text.toString().trim()
-        val fecha = etFecha.text.toString().trim()
-        val horario = etHorario.text.toString().trim()
+        val fecha = tvFecha.text.toString().trim()
+        val horario = tvHorario.text.toString().trim()
         val limiteAlumnosStr = etLimiteAlumnos.text.toString().trim()
         val descripcion = etDescripcion.text.toString().trim()
 

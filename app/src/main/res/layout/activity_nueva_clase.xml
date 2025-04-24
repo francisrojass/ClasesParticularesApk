@@ -38,25 +38,27 @@
         android:layout_height="39dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/edittext_border"
+        android:gravity="center_vertical"
         android:hint="Nombre de la clase"
-        android:padding="12dp"
+        android:padding="10dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTituloNuevaClase" />
 
     <TextView
         android:id="@+id/tvAsignaturaClase"
-        android:layout_width="297dp"
+        android:layout_width="295dp"
         android:layout_height="49dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/spinner_background"
         android:drawableRight="@drawable/ic_arrow_drop_down"
         android:hint="@string/subjects"
-        android:padding="12dp"
+        android:padding="10dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNombreClase" />
 
@@ -68,43 +70,46 @@
         android:background="@drawable/edittext_border"
         android:hint="@string/class_price"
         android:inputType="numberDecimal"
-        android:padding="12dp"
+        android:padding="10dp"
         android:textSize="16sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvAsignaturaClase" />
 
 
-    <EditText
-        android:id="@+id/etFecha"
+    <TextView
+        android:id="@+id/tvFecha"
         android:layout_width="295dp"
         android:layout_height="39dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/edittext_border"
         android:hint="@string/class_date"
         android:inputType="date"
-        android:padding="12dp"
+        android:padding="10dp"
         android:textSize="16sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPrecioHora" />
 
-    <EditText
-        android:id="@+id/etHorario"
+    <TextView
+        android:id="@+id/tvHorario"
         android:layout_width="295dp"
         android:layout_height="39dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/edittext_border"
         android:hint="@string/class_time"
         android:inputType="time"
-        android:padding="12dp"
+        android:padding="10dp"
         android:textSize="16sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etFecha" />
+        app:layout_constraintTop_toBottomOf="@id/tvFecha" />
 
     <EditText
         android:id="@+id/etLimiteAlumnos"
@@ -114,12 +119,13 @@
         android:background="@drawable/edittext_border"
         android:hint="Límite de alumnos"
         android:inputType="number"
-        android:padding="12dp"
+        android:padding="10dp"
         android:textSize="16sp"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etHorario" />
+        app:layout_constraintTop_toBottomOf="@id/tvHorario" />
 
     <EditText
         android:id="@+id/etDescripcion"
