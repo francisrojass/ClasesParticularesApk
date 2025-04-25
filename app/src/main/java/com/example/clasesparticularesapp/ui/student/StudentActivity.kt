@@ -12,6 +12,8 @@ import com.example.clasesparticularesapp.R
 import com.example.clasesparticularesapp.models.Clase
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.ImageView
+import com.google.firebase.auth.FirebaseAuth
+
 
 
 class StudentActivity : AppCompatActivity() {
@@ -53,17 +55,30 @@ class StudentActivity : AppCompatActivity() {
     }
 
     private fun cargarClases() {
-        db.collection("clases")
-            .get()
-            .addOnSuccessListener { documents ->
-                clasesList.clear()
-                for (document in documents) {
-                    val clase = document.toObject(Clase::class.java)
-                    clasesList.add(clase)
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        // Primero obtenemos las asignaturas seleccionadas por el estudiante
+        db.collection("estudiantes").document(uid).get()
+            .addOnSuccessListener { documentoEstudiante ->
+                val asignaturasSeleccionadas = documentoEstudiante.get("asignaturas") as? List<String>
+
+                if (asignaturasSeleccionadas != null) {
+                    // Luego cargamos las clases y las filtramos
+                    db.collection("clases").get()
+                        .addOnSuccessListener { documents ->
+                            clasesList.clear()
+                            for (document in documents) {
+                                val clase = document.toObject(Clase::class.java)
+                                if (clase.asignatura in asignaturasSeleccionadas) {
+                                    clasesList.add(clase)
+                                }
+                            }
+                            adapter.actualizarLista(clasesList)
+                        }
                 }
-                adapter.actualizarLista(clasesList)
             }
     }
+
 
     private fun filtrarClases(texto: String) {
         val listaFiltrada = clasesList.filter { it.nombre.contains(texto, true) }

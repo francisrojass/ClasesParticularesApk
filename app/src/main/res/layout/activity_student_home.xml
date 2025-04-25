@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="ExtraText">
+
+        <ImageView
+            android:id="@+id/imagenPerfil"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_profile_placeholder"
+            tools:ignore="ExtraText" /> <!-- Foto por defecto -->
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btnBuscarClases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar Clases" />
+
+        <Button
+            android:id="@+id/btnPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Perfil"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
