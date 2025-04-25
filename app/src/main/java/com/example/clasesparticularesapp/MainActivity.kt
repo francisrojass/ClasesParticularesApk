@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.clasesparticularesapp.ui.auth.LoginActivity
-import com.example.clasesparticularesapp.ui.student.StudentActivity
+import com.example.clasesparticularesapp.ui.student.StudentHomeActivity
 import com.example.clasesparticularesapp.ui.teacher.TeacherActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         studentCard.setOnClickListener {
             showToast("Clic en estudiante")
-            navigateToActivity(StudentActivity::class.java)
+            navigateToActivity(StudentHomeActivity::class.java)
             setUserRole("student")
         }
 
