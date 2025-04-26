@@ -147,6 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/darker_gray"
         android:text="@string/discard"
         app:layout_constraintEnd_toStartOf="@id/btnGuardarClase"
         app:layout_constraintStart_toStartOf="parent"
