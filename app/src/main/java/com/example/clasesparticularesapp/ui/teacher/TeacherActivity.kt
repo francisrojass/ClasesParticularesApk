@@ -8,13 +8,16 @@ import com.example.clasesparticularesapp.R
 import android.widget.ImageButton
 import android.widget.Button
 import android.widget.TextView
+import android.widget.ImageView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.bumptech.glide.Glide
 import android.util.Log
 
 class TeacherActivity : AppCompatActivity() {
 
     private lateinit var tvBienvenida: TextView
+    private lateinit var imageViewFotoPerfil: ImageView
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
@@ -24,35 +27,25 @@ class TeacherActivity : AppCompatActivity() {
         Log.d("TeacherActivity", "onCreate() llamado")
 
         tvBienvenida = findViewById(R.id.teacher_title)
+        imageViewFotoPerfil = findViewById(R.id.imgPerfil)
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
         val userId = auth.currentUser?.uid
         cargarDatosPerfil(userId)
 
-        // Configurar el botón de retroceso
         val backButton: ImageButton = findViewById(R.id.back_button)
         backButton.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        // ✅ ELIMINADO: Manejo específico del botón de retroceso del sistema
-        // onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-        //     override fun handleOnBackPressed() {
-        //         val intent = Intent(this@TeacherActivity, MainActivity::class.java)
-        //         startActivity(intent)
-        //         finish()
-        //     }
-        // })
-
-        // ✅ Configurar el botón "Mis Clases"
-        val misClasesButton: Button = findViewById(R.id.manage_classes_button) // Asegúrate de que el ID coincide
+        val misClasesButton: Button = findViewById(R.id.manage_classes_button)
         misClasesButton.setOnClickListener {
             val intent = Intent(this, MisClasesActivity::class.java)
             startActivity(intent)
         }
 
-        val editarPerfilButton: Button = findViewById(R.id.editarPerfil) // Asegúrate de que el ID coincide
+        val editarPerfilButton: Button = findViewById(R.id.editarPerfil)
         editarPerfilButton.setOnClickListener {
             val intent = Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
@@ -73,20 +66,31 @@ class TeacherActivity : AppCompatActivity() {
                 .addOnSuccessListener { document ->
                     if (document != null && document.exists()) {
                         val nombre = document.getString("nombre") ?: ""
+                        val fotoUrl = document.getString("fotoUrl") ?: ""
                         tvBienvenida.text = "Bienvenido, $nombre"
-                        // Aquí podrías actualizar otros TextViews si los tuvieras en este layout
+
+                        // Cargar foto de perfil con Glide
+                        if (fotoUrl.isNotEmpty()) {
+                            Glide.with(this)
+                                .load(fotoUrl)
+                                .placeholder(R.drawable.ic_profile_placeholder)
+                                .error(R.drawable.ic_profile_placeholder)
+                                .into(imageViewFotoPerfil)
+                        } else {
+                            imageViewFotoPerfil.setImageResource(R.drawable.ic_profile_placeholder)
+                        }
                     } else {
                         tvBienvenida.text = "Bienvenido"
-                        // Actualizar otros TextViews a valores por defecto si es necesario
+                        imageViewFotoPerfil.setImageResource(R.drawable.ic_profile_placeholder)
                     }
                 }
                 .addOnFailureListener {
                     tvBienvenida.text = "Bienvenido"
-                    // Manejar el error al cargar los datos
+                    imageViewFotoPerfil.setImageResource(R.drawable.ic_profile_placeholder)
                 }
         } else {
             tvBienvenida.text = "Bienvenido"
-            // Establecer otros TextViews a valores por defecto si no hay usuario
+            imageViewFotoPerfil.setImageResource(R.drawable.ic_profile_placeholder)
         }
     }
 }
