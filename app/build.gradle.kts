@@ -72,6 +72,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.glide)
     implementation(libs.cardview)
-    //ksp(libs.compiler)
+    implementation(libs.glide)
+    implementation(libs.firebase.storage.ktx)
+    kapt(libs.compiler)
 
 }

@@ -3,13 +3,10 @@ package com.example.clasesparticularesapp.ui.teacher
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.clasesparticularesapp.R
 import com.example.clasesparticularesapp.models.Profesor
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +17,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var etNombre: EditText
     private lateinit var etApellidos: EditText
     private lateinit var tvAsignaturas: TextView
+    private lateinit var imageViewFotoPerfil: ImageView
 
     private val asignaturasDisponibles = arrayOf("Matemáticas", "Física", "Inglés", "Química", "Historia")
     private val asignaturasSeleccionadas = mutableListOf<String>()
@@ -27,6 +25,8 @@ class EditProfileActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+
+    private var fotoUrl: String = "" // Para guardar la URL de la foto
 
     private val db = FirebaseFirestore.getInstance()
 
@@ -37,13 +37,14 @@ class EditProfileActivity : AppCompatActivity() {
         etNombre = findViewById(R.id.etNombre)
         etApellidos = findViewById(R.id.etApellidos)
         tvAsignaturas = findViewById(R.id.tvAsignaturas)
+        imageViewFotoPerfil = findViewById(R.id.imgPerfil)
 
         auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
         val userId = auth.currentUser?.uid
 
-        firestore = FirebaseFirestore.getInstance()
         if (userId != null) {
-            cargarDatosPerfil() // Cargar los datos iniciales al crear la actividad
+            cargarDatosPerfil()
         }
 
         val backButton: ImageButton = findViewById(R.id.back_button)
@@ -58,13 +59,15 @@ class EditProfileActivity : AppCompatActivity() {
 
         val saveButton: Button = findViewById(R.id.btnGuardarCambiosPerfil)
         saveButton.setOnClickListener {
-            // Mostrar el diálogo de confirmación al pulsar el botón Guardar
             mostrarDialogoConfirmacion()
         }
 
         tvAsignaturas.setOnClickListener {
             mostrarDialogoSeleccion()
         }
+
+        // Si quieres permitir cambiar la foto, puedes poner un listener aquí
+        // imageViewFotoPerfil.setOnClickListener { ... }
     }
 
     private fun mostrarDialogoConfirmacion() {
@@ -72,10 +75,9 @@ class EditProfileActivity : AppCompatActivity() {
             .setTitle("Confirmar cambios")
             .setMessage("¿Estás seguro de que deseas guardar los cambios?")
             .setPositiveButton("Sí") { _, _ ->
-                // Si el usuario dice que sí, guardar los cambios y navegar
                 guardarCambios()
             }
-            .setNegativeButton("No", null) // Si el usuario dice que no, no hacer nada
+            .setNegativeButton("No", null)
             .show()
     }
 
@@ -92,23 +94,17 @@ class EditProfileActivity : AppCompatActivity() {
             apellidos = apellidos,
             asignaturas = asignaturas,
             valoracion = 0f,
-            fotoUrl = ""
+            fotoUrl = fotoUrl // Guardamos la URL de la foto
         )
 
         db.collection("profesores").document(userId)
             .set(profesorActualizado)
             .addOnSuccessListener {
-                Log.d("EditProfile", "Perfil actualizado correctamente (Listener)")
                 Toast.makeText(this, "Perfil actualizado correctamente", Toast.LENGTH_SHORT).show()
-                Log.d("EditProfile", "Toast mostrado")
                 val intent = Intent(this, TeacherActivity::class.java)
-                Log.d("EditProfile", "Intent creado")
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                Log.d("EditProfile", "Flags del Intent configurados")
                 startActivity(intent)
-                Log.d("EditProfile", "startActivity llamado")
                 finish()
-                Log.d("EditProfile", "finish llamado")
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al actualizar: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -125,10 +121,7 @@ class EditProfileActivity : AppCompatActivity() {
                     val nombre = document.getString("nombre") ?: ""
                     val apellidos = document.getString("apellidos") ?: ""
                     val asignaturasGuardadas = document.get("asignaturas") as? List<*> ?: emptyList<Any>()
-
-                    Log.d("EditProfile", "Nombre cargado: $nombre")
-                    Log.d("EditProfile", "Apellidos cargados: $apellidos")
-                    Log.d("EditProfile", "Asignaturas cargadas: $asignaturasGuardadas")
+                    fotoUrl = document.getString("fotoUrl") ?: "" // Obtenemos la URL de la foto
 
                     etNombre.setText(nombre)
                     etApellidos.setText(apellidos)
@@ -147,12 +140,20 @@ class EditProfileActivity : AppCompatActivity() {
                     if (asignaturasSeleccionadas.isNotEmpty()) {
                         tvAsignaturas.text = asignaturasSeleccionadas.joinToString(", ")
                     }
-                } else {
-                    Log.d("EditProfile", "El documento del profesor no existe")
+
+                    // Cargar la imagen con Glide
+                    if (fotoUrl.isNotEmpty()) {
+                        Glide.with(this)
+                            .load(fotoUrl)
+                            .placeholder(R.drawable.ic_profile_placeholder)
+                            .error(R.drawable.ic_profile_placeholder)
+                            .into(imageViewFotoPerfil)
+                    } else {
+                        imageViewFotoPerfil.setImageResource(R.drawable.ic_profile_placeholder)
+                    }
                 }
             }
             .addOnFailureListener { e ->
-                Log.e("EditProfile", "Error al cargar datos: ${e.message}")
                 Toast.makeText(this, "Error al cargar datos", Toast.LENGTH_SHORT).show()
             }
     }
