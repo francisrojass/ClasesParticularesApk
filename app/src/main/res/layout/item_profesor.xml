@@ -69,6 +69,14 @@
                 android:layout_height="wrap_content"
                 android:text="Valoración"
                 android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_apuntarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apuntarse"
+                android:layout_gravity="end"
+                android:layout_marginTop="8dp" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
