@@ -1,41 +1,56 @@
 package com.example.clasesparticularesapp.ui.teacher
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
 import com.example.clasesparticularesapp.R
-
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class DetalleClaseActivity : AppCompatActivity() {
+
+    private val db = FirebaseFirestore.getInstance()
+    private var listenerRegistration: ListenerRegistration? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_clase)
 
-        val nombre = intent.getStringExtra("nombre")
-        val asignatura = intent.getStringExtra("asignatura")
-        val descripcion = intent.getStringExtra("descripcion")
-        val fecha = intent.getStringExtra("fecha")
-        val horario = intent.getStringExtra("horario")
-        val limite = intent.getIntExtra("limiteAlumnos", 0)
-        val precio = intent.getFloatExtra("precioHora", 0f)
+        val claseId = intent.getStringExtra("claseId") ?: return
 
-        findViewById<TextView>(R.id.tvNombre).text = "Clase: $nombre"
-        findViewById<TextView>(R.id.tvAsignatura).text = "Asignatura: $asignatura"
-        findViewById<TextView>(R.id.tvDescripcion).text = "Descripción: $descripcion"
-        findViewById<TextView>(R.id.tvFecha).text = "Fecha: $fecha"
-        findViewById<TextView>(R.id.tvHorario).text = "Horario: $horario"
-        findViewById<TextView>(R.id.tvLimite).text = "Límite de alumnos: $limite"
-        findViewById<TextView>(R.id.tvPrecio).text = "Precio por hora: $precio €"
+        listenerRegistration = db.collection("clases").document(claseId)
+            .addSnapshotListener { document, error ->
+                if (error != null || document == null || !document.exists()) {
+                    findViewById<TextView>(R.id.tvNombre).text = "Error cargando la clase"
+                    return@addSnapshotListener
+                }
 
+                findViewById<TextView>(R.id.tvNombre).text = "Clase: ${document.getString("nombre")}"
+                findViewById<TextView>(R.id.tvAsignatura).text = "Asignatura: ${document.getString("asignatura")}"
+                findViewById<TextView>(R.id.tvDescripcion).text = "Descripción: ${document.getString("descripcion")}"
+                findViewById<TextView>(R.id.tvFecha).text = "Fecha: ${document.getString("fecha")}"
+                findViewById<TextView>(R.id.tvHorario).text = "Horario: ${document.getString("horario")}"
+                val limite = document.getLong("limiteAlumnos")?.toInt() ?: 0
+                val precio = document.getDouble("precioHora")?.toFloat() ?: 0f
+                findViewById<TextView>(R.id.tvLimite).text = "Límite de alumnos: $limite"
+                findViewById<TextView>(R.id.tvPrecio).text = "Precio por hora: $precio €"
 
-        val backButton: ImageButton = findViewById(R.id.back_button)
+                val alumnos = document.get("alumnos") as? List<Map<String, Any>>
+                val alumnosText = alumnos?.joinToString("\n") {
+                    "${it["nombre"] ?: ""} ${it["apellidos"] ?: ""}"
+                } ?: "No hay alumnos apuntados"
+                findViewById<TextView>(R.id.tvAlumnos).text = "Alumnos:\n$alumnosText"
+            }
 
-        backButton.setOnClickListener {
+        findViewById<ImageButton>(R.id.back_button).setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-            // O puedes usar la forma explícita:
-            // finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        listenerRegistration?.remove()
     }
 }
