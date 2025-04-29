@@ -33,17 +33,12 @@ class MisClasesAdapter(private val clases: MutableList<Clase>, private val activ
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetalleClaseActivity::class.java).apply {
-                putExtra("nombre", clase.nombre)
-                putExtra("asignatura", clase.asignatura)
-                putExtra("descripcion", clase.descripcion)
-                putExtra("fecha", clase.fecha)
-                putExtra("horario", clase.horario)
-                putExtra("limiteAlumnos", clase.limiteAlumnos)
-                putExtra("precioHora", clase.precioHora)
+                putExtra("claseId", clase.id)
             }
             holder.itemView.context.startActivity(intent)
         }
-            holder.eliminarClase.setOnClickListener {
+
+        holder.eliminarClase.setOnClickListener {
             val claseIdToDelete = clase.id
             if (claseIdToDelete.isNotEmpty()) {
                 eliminarClaseDeFirebase(claseIdToDelete, position)

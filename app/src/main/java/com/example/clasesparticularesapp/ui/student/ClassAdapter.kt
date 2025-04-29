@@ -3,10 +3,13 @@ package com.example.clasesparticularesapp.ui.student
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clasesparticularesapp.R
 import com.example.clasesparticularesapp.models.Clase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ClassAdapter(private var clases: List<Clase>) : RecyclerView.Adapter<ClassAdapter.ClassViewHolder>() {
@@ -45,6 +48,37 @@ class ClassAdapter(private var clases: List<Clase>) : RecyclerView.Adapter<Class
                 }
         } ?: run {
             holder.nombre.text = "ID de profesor no disponible"
+        }
+
+        val btnApuntarse = holder.itemView.findViewById<Button>(R.id.btn_apuntarse).setOnClickListener {
+            val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return@setOnClickListener
+            val db = FirebaseFirestore.getInstance()
+            db.collection("estudiantes").document(uid).get()
+                .addOnSuccessListener { doc ->
+                    val nombre = doc.getString("nombre") ?: ""
+                    val apellidos = doc.getString("apellidos") ?: ""
+                    val alumnoData = mapOf(
+                        "id" to uid,
+                        "nombre" to nombre,
+                        "apellidos" to apellidos
+                    )
+                    db.collection("clases").document(clase.id)
+                        .update("alumnos", com.google.firebase.firestore.FieldValue.arrayUnion(alumnoData))
+                        .addOnSuccessListener {
+                            val nuevosAlumnos = clase.alumnos + alumnoData
+                            val claseActualizada = clase.copy(alumnos = nuevosAlumnos)
+                            (clases as MutableList)[position] = claseActualizada
+                            notifyItemChanged(position)
+                        }
+                }
+        }
+
+        // Verificar si ya está apuntado
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
+        val yaApuntado = clase.alumnos.any { it["id"] == currentUserId }
+        holder.itemView.findViewById<Button>(R.id.btn_apuntarse).apply {
+            isEnabled = !yaApuntado && clase.alumnos.size < clase.limiteAlumnos
+            text = if (yaApuntado) "Apuntado" else "Apuntarse"
         }
     }
 

@@ -68,7 +68,9 @@ class StudentActivity : AppCompatActivity() {
                         .addOnSuccessListener { documents ->
                             clasesList.clear()
                             for (document in documents) {
-                                val clase = document.toObject(Clase::class.java)
+                                val clase = document.toObject(Clase::class.java).apply {
+                                    id = document.id // Asegurar que tenemos el ID del documento
+                                }
                                 if (clase.asignatura in asignaturasSeleccionadas) {
                                     clasesList.add(clase)
                                 }
@@ -77,6 +79,7 @@ class StudentActivity : AppCompatActivity() {
                         }
                 }
             }
+
     }
 
 
